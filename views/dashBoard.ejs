@@ -1,13 +1,181 @@
 <html>
-    <head>
+	<head>
 		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, userscalable=no, shrink-to-fit=no">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<title><%= title %></title>
 	</head>
-    <body>
-        <h1>Chart.js</h1>
-    </body>
+	<body>
+		<div class="page">
+			<h1>[Bar Chart] 대한민국의 인구밀도</h1>
+			<div>
+				<canvas id="barChart"></canvas>
+			</div>
+			<h1>[Line Chart] 대한민국 기온 평균(2010년)</h1>
+			<div>
+				<canvas id="lineChart"></canvas>
+			</div>
+		</body>
+		</div>
 </html>
 
+<script>
+	// barChart 시작
+	const ctxBarChart = document.getElementById('barChart');
+	
+	const data = {
+		"서울특별시": "16827",
+		"부산광역시": "4445",
+		"대구광역시": "2836",
+		"인천광역시": "3118",
+		"광주광역시": "2845",
+		"대전광역시": "2719",
+		"울산광역시": "1110",
+		"세종특별자치시": "260",
+		"경기도": "1213",
+		"강원도": "81",
+		"충청북도": "137",
+		"충청남도": "285",
+		"전라북도": "124",
+		"전라남도": "92",
+		"경상북도": "138",
+		"경상남도": "214",
+		"제주특별자치도": "332"
+	}
+
+	const barChart = new Chart(ctxBarChart, {
+		type: 'bar',
+		data: {
+		labels: Object.keys(data),
+		datasets: [{
+			label: '2021년 1월 기준 (단위: 명/km²)',
+			data: Object.values(data),
+			borderWidth: 1,
+			borderRadius: 10
+		}]
+	},
+	options: {
+		scales: {
+			y: {
+			beginAtZero: true
+			}
+		}
+	}
+	});
+	// barChart 끝
+
+	// lineChart 시작
+	const ctxLineChart = document.getElementById('lineChart');
+
+	const temperature = [
+    {
+      "month": "1월",
+      "avg_high_temp": 1.9,
+      "avg_low_temp": -7.0
+    },
+    {
+      "month": "2월",
+      "avg_high_temp": 6.4,
+      "avg_low_temp": -2.4
+    },
+    {
+      "month": "3월",
+      "avg_high_temp": 12.4,
+      "avg_low_temp": 2.8
+    },
+    {
+      "month": "4월",
+      "avg_high_temp": 17.8,
+      "avg_low_temp": 8.3
+    },
+    {
+      "month": "5월",
+      "avg_high_temp": 23.1,
+      "avg_low_temp": 13.2
+    },
+    {
+      "month": "6월",
+      "avg_high_temp": 27.3,
+      "avg_low_temp": 18.1
+    },
+    {
+      "month": "7월",
+      "avg_high_temp": 29.8,
+      "avg_low_temp": 21.1
+    },
+    {
+      "month": "8월",
+      "avg_high_temp": 29.5,
+      "avg_low_temp": 21.2
+    },
+    {
+      "month": "9월",
+      "avg_high_temp": 25.1,
+      "avg_low_temp": 15.8
+    },
+    {
+      "month": "10월",
+      "avg_high_temp": 18.9,
+      "avg_low_temp": 7.8
+    },
+    {
+      "month": "11월",
+      "avg_high_temp": 11.4,
+      "avg_low_temp": 1.2
+    },
+    {
+      "month": "12월",
+      "avg_high_temp": 3.8,
+      "avg_low_temp": -5.0
+    }
+	]
+
+	const lineChart = new Chart(ctxLineChart, {
+		type: 'line',
+		data: {
+		labels: temperature.map(el => el.month),
+		datasets: [{
+			label: '최고 기온',
+			data: temperature.map(el => el.avg_high_temp),
+			backgroundColor: 'pink',
+			borderColor: 'pink',
+			pointStyle: 'star',
+			pointRadius: 7,
+			pointHoverRadius: 15
+		}, {
+			label: '최저 기온',
+			data: temperature.map(el => el.avg_low_temp),
+			backgroundColor: 'skyBlue',
+			borderColor: 'skyBlue',
+			pointStyle: 'cross',
+			pointRadius: 7,
+			pointHoverRadius: 15
+		}]
+	},
+	options: {
+		scales: {
+			y: {
+			beginAtZero: true
+			}
+		}
+	}
+	});
+
+</script>
+
+
 <style>
+
+.page {
+	width: 21cm;
+	min-height: 29.7cm;
+	padding: 2cm 1cm 2cm 1cm;
+	font-size: 10px;
+}
+
+@page {
+	size: A4;
+	margin: 0;
+}
+
 </style>
