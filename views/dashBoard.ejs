@@ -7,16 +7,27 @@
 	</head>
 	<body>
 		<div class="page">
-			<h1>[Bar Chart] 대한민국의 인구밀도</h1>
-			<div>
-				<canvas id="barChart"></canvas>
+			<div class="chartContainer">
+				<h1>[Bar Chart] 대한민국의 인구밀도(2021년 1월)</h1>
+				<div class="chartWidth">
+					<div class="borderBottom">
+						<canvas id="barChart"></canvas>
+					</div>
+				</div>
+				<h1>[Line Chart] 대한민국 기온 평균(2010년)</h1>
+				<div class="chartWidth">
+					<div class="borderBottom">
+						<canvas id="lineChart"></canvas>
+					</div>
+				</div>
+				<h1>[Doughnut Chart] 대한민국 혈액형 비율(2019년)</h1>
+				<div class="doughnutChartWidth">
+					<canvas id="doughnutChart"></canvas>
+				</div>
+				</div>
 			</div>
-			<h1>[Line Chart] 대한민국 기온 평균(2010년)</h1>
-			<div>
-				<canvas id="lineChart"></canvas>
-			</div>
-		</body>
 		</div>
+	</body>
 </html>
 
 <script>
@@ -46,18 +57,19 @@
 	const barChart = new Chart(ctxBarChart, {
 		type: 'bar',
 		data: {
-		labels: Object.keys(data),
-		datasets: [{
-			label: '2021년 1월 기준 (단위: 명/km²)',
-			data: Object.values(data),
-			borderWidth: 1,
-			borderRadius: 10
-		}]
+			labels: Object.keys(data),
+			datasets: [{
+				label: '밀도 (단위: 명/km²)',
+				data: Object.values(data),
+				borderWidth: 1,
+				borderRadius: 10,
+				backgroundColor: '#B2A4FF',
+			}]
 	},
 	options: {
 		scales: {
 			y: {
-			beginAtZero: true
+				beginAtZero: true
 			}
 		}
 	}
@@ -134,37 +146,87 @@
 		type: 'line',
 		data: {
 		labels: temperature.map(el => el.month),
-		datasets: [{
-			label: '최고 기온',
-			data: temperature.map(el => el.avg_high_temp),
-			backgroundColor: 'pink',
-			borderColor: 'pink',
-			pointStyle: 'star',
-			pointRadius: 7,
-			pointHoverRadius: 15
-		}, {
-			label: '최저 기온',
-			data: temperature.map(el => el.avg_low_temp),
-			backgroundColor: 'skyBlue',
-			borderColor: 'skyBlue',
-			pointStyle: 'cross',
-			pointRadius: 7,
-			pointHoverRadius: 15
-		}]
+			datasets: [{
+				label: '최고 기온',
+				data: temperature.map(el => el.avg_high_temp),
+				backgroundColor: 'pink',
+				borderColor: 'pink',
+				pointStyle: 'star',
+				pointRadius: 7,
+				pointHoverRadius: 15
+			}, {
+				label: '최저 기온',
+				data: temperature.map(el => el.avg_low_temp),
+				backgroundColor: 'skyBlue',
+				borderColor: 'skyBlue',
+				pointStyle: 'cross',
+				pointRadius: 7,
+				pointHoverRadius: 15
+			}]
 	},
 	options: {
 		scales: {
 			y: {
-			beginAtZero: true
+				beginAtZero: true
 			}
 		}
 	}
 	});
+	// lineChart 끝
+
+	// doughnutChart 시작
+	const ctxDoughnutChart = document.getElementById('doughnutChart');
+
+	const bloodType = {
+		A: 43,
+		B: 27,
+		O: 26,
+		AB: 4
+	}
+	const colors = ['#C0EEE4', '#F8F988', '#FFCAC8', '#FF9E9E']
+
+	const doughnutChart = new Chart(ctxDoughnutChart, {
+		type: 'doughnut',
+		data: {
+			labels: Object.keys(bloodType),
+			datasets: [{
+				label: '비율',
+				data: Object.values(bloodType),
+				backgroundColor: colors,
+			}]
+	},
+	options: {
+		responsive: true,
+		plugins: {
+			legend: {
+				position: 'top',
+			},
+		}
+	}
+	});
+	// doughnutChart 끝
 
 </script>
 
 
 <style>
+.chartContainer { 
+	text-align: center;
+}
+
+.chartWidth {
+	width: 500px;
+	margin: auto;
+}
+
+.doughnutChartWidth {
+	width: 300px;
+	margin: auto;
+}
+
+.borderBottom {
+	border-bottom: 1px solid lightgray;
+}
 
 .page {
 	width: 21cm;
