@@ -3,6 +3,38 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
 		<!-- user-scalable: 크기조절가능유무, initial-scale: 초기회면배율, maximum-scale: 최대화면배율 -->
+		<style>
+			.chartContainer { 
+				text-align: center;
+			}
+			
+			.chartWidth {
+				width: 500px;
+				margin: auto;
+			}
+			
+			.doughnutChartWidth {
+				width: 300px;
+				margin: auto;
+			}
+			
+			.borderBottom {
+				border-bottom: 1px solid lightgray;
+			}
+			
+			.page {
+				width: 21cm;
+				min-height: 29.7cm;
+				padding: 2cm 1cm 2cm 1cm;
+				font-size: 10px;
+			}
+			
+			@page {
+				size: A4;
+				margin: 0;
+			}
+			
+			</style>
 		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 	<title><%= title %></title>
 	</head>
@@ -208,37 +240,3 @@
 	// doughnutChart 끝
 
 </script>
-
-
-<style>
-.chartContainer { 
-	text-align: center;
-}
-
-.chartWidth {
-	width: 500px;
-	margin: auto;
-}
-
-.doughnutChartWidth {
-	width: 300px;
-	margin: auto;
-}
-
-.borderBottom {
-	border-bottom: 1px solid lightgray;
-}
-
-.page {
-	width: 21cm;
-	min-height: 29.7cm;
-	padding: 2cm 1cm 2cm 1cm;
-	font-size: 10px;
-}
-
-@page {
-	size: A4;
-	margin: 0;
-}
-
-</style>
